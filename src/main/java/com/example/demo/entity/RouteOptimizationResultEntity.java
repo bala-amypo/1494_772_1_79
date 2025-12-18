@@ -1,6 +1,5 @@
 package com.example.demo.entity;
 
-import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,18 +10,23 @@ public class RouteOptimizationResultEntity {
     private Long id;
 
     @ManyToOne
-    private Shipment shipment;
+    private ShipmentEntity shipment;
 
     private Double optimizedDistanceKm;
-    private Double estimatedFuelUsageL;
-    private LocalDateTime generatedAt;
+    private Double estimatedFuelUsage;
 
-    @PrePersist
-    public void onCreate() {
-        this.generatedAt = LocalDateTime.now();
+    public RouteOptimizationResultEntity() {
     }
 
-    public RouteOptimizationResultEntity() {}
+    public Long getId() {
+        return id;
+    }
 
-    public Long getId() { return id; }
+    public ShipmentEntity getShipment() {
+        return shipment;
+    }
+
+    public void setShipment(ShipmentEntity shipment) {
+        this.shipment = shipment;
+    }
 }
