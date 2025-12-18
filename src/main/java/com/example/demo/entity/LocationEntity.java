@@ -1,5 +1,5 @@
 
-LocationEntity
+
 
 
 package com.example.demo.entity;
