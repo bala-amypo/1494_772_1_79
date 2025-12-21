@@ -19,7 +19,8 @@ public class ShipmentServiceImpl implements ShipmentService {
     public ShipmentEntity createShipment(ShipmentEntity shipment) {
 
         if (shipment.getWeightKg() <= 0) {
-            throw new IllegalArgumentException("Weight must be positive");
+            throw new IllegalArgumentException("Weight exceeds vehicle capacity");
+
         }
 
         return shipmentRepository.save(shipment);
