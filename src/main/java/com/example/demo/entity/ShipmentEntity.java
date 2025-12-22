@@ -1,3 +1,6 @@
+
+
+
 package com.example.demo.entity;
 
 import java.time.LocalDate;
@@ -25,10 +28,18 @@ public class ShipmentEntity {
     public ShipmentEntity() {
     }
 
-    public Long getId() { return id; }
-    public Double getWeightKg() { return weightKg; }
-    public LocalDate getScheduledDate() { return scheduledDate; }
-    public VehicleEntity getVehicle() { return vehicle; }
+    public Long getId() { 
+        return id; 
+        }
+    public Double getWeightKg() { 
+    return weightKg; 
+    }
+    public LocalDate getScheduledDate() { 
+        return scheduledDate; 
+        }
+    public VehicleEntity getVehicle() { 
+        return vehicle; 
+        }
     public LocationEntity getPickupLocation() { return pickupLocation; }
     public LocationEntity getDropLocation() { return dropLocation; }
 
