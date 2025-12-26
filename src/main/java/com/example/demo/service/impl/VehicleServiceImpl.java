@@ -6,11 +6,14 @@ import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.repository.VehicleRepository;
 import com.example.demo.service.VehicleService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
 @Service
+@Validated  // Enable method-level validation
 public class VehicleServiceImpl implements VehicleService {
 
     private final VehicleRepository vehicleRepository;
@@ -23,7 +26,20 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public Vehicle addVehicle(Long userId, Vehicle vehicle) {
+    public Vehicle addVehicle(Long userId, @Valid Vehicle vehicle) {
+        
+        // Validate capacity is not null and not negative/zero
+        if (vehicle.getCapacityKg() == null) {
+            throw new IllegalArgumentException("Capacity cannot be null");
+        }
+        if (vehicle.getCapacityKg() <= 0) {
+            throw new IllegalArgumentException("Capacity must be greater than 0");
+        }
+        
+        // Validate fuel efficiency if provided
+        if (vehicle.getFuelEfficiency() != null && vehicle.getFuelEfficiency() <= 0) {
+            throw new IllegalArgumentException("Fuel efficiency must be greater than 0");
+        }
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
