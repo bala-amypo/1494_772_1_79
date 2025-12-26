@@ -1,30 +1,28 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Location;
+import com.example.demo.service.LocationService;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.example.demo.entity.LocationEntity;
-import com.example.demo.service.LocationService;
-
 @RestController
+@RequestMapping("/locations")
 public class LocationController {
 
-    @Autowired
-    private LocationService locationService;
+    private final LocationService service;
 
-    @PostMapping("/addlocation")
-    public LocationEntity add(@RequestBody LocationEntity le) {
-        return locationService.createlocation(le); // matches service
+    public LocationController(LocationService service){
+        this.service = service;
     }
 
-    @GetMapping("/showlocation")
-    public List<LocationEntity> show() {
-        return locationService.getAllLocations(); // matches service
+    @PostMapping
+    public Location create(@RequestBody Location l){
+        return service.createLocation(l);
+    }
+
+    @GetMapping
+    public List<Location> getAll(){
+        return service.getAllLocations();
     }
 }
-

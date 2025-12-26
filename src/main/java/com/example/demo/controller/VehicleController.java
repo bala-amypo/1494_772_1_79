@@ -1,32 +1,28 @@
-
-
-
 package com.example.demo.controller;
 
-import java.util.List;
-
+import com.example.demo.entity.Vehicle;
+import com.example.demo.service.VehicleService;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.entity.VehicleEntity;
-import com.example.demo.service.VehicleService;
+import java.util.List;
 
 @RestController
 @RequestMapping("/vehicles")
 public class VehicleController {
 
-    private final VehicleService vehicleService;
+    private final VehicleService service;
 
-    public VehicleController(VehicleService vehicleService) {
-        this.vehicleService = vehicleService;
+    public VehicleController(VehicleService service){
+        this.service = service;
     }
 
-    @PostMapping
-    public VehicleEntity addVehicle(@RequestBody VehicleEntity vehicle) {
-        return vehicleService.addVehicle(vehicle);
+    @PostMapping("/{userId}")
+    public Vehicle add(@PathVariable Long userId, @RequestBody Vehicle v){
+        return service.addVehicle(userId, v);
     }
 
-    @GetMapping
-    public List<VehicleEntity> getAllVehicles() {
-        return vehicleService.getAllVehicles();
+    @GetMapping("/user/{userId}")
+    public List<Vehicle> getByUser(@PathVariable Long userId){
+        return service.getVehiclesByUser(userId);
     }
 }
