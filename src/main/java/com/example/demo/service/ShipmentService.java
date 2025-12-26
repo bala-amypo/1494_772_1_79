@@ -1,7 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.ShipmentEntity;
+import com.example.demo.entity.Shipment;
 
 public interface ShipmentService {
-    ShipmentEntity createShipment(ShipmentEntity shipment);
+    Shipment createShipment(Long vehicleId, Shipment s);
+    Shipment getShipment(Long id);
 }

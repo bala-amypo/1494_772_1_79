@@ -1,35 +1,39 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
+
+import com.example.demo.entity.Location;
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.repository.LocationRepository;
+import com.example.demo.service.LocationService;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
-
-import com.example.demo.entity.LocationEntity;
-import com.example.demo.repository.LocationRepository;
 
 @Service
 public class LocationServiceImpl implements LocationService {
 
-    private final LocationRepository locationRepository;
-    public LocationServiceImpl(LocationRepository locationRepository) {
-        this.locationRepository = locationRepository;
+    private final LocationRepository repo;
+
+    public LocationServiceImpl(LocationRepository repo){
+        this.repo = repo;
     }
 
     @Override
-    public LocationEntity createlocation(LocationEntity le) {
-        if (le.getLatitude() == null || le.getLatitude() > 90 || le.getLatitude() < -90) {
-            throw new IllegalArgumentException("Invalid latitude value");
-        }
+    public Location createLocation(Location l){
 
-        if (le.getLongitude() == null || le.getLongitude() > 180 || le.getLongitude() < -180) {
-            throw new IllegalArgumentException("Invalid longitude value");
-        }
+        if(l.getLatitude() > 90 || l.getLatitude() < -90)
+            throw new IllegalArgumentException("latitude");
 
-        return locationRepository.save(le);
+        return repo.save(l);
     }
 
     @Override
-    public List<LocationEntity> getAllLocations() {
-        return locationRepository.findAll();
+    public List<Location> getAllLocations(){
+        return repo.findAll();
+    }
+
+    @Override
+    public Location findById(Long id){
+        return repo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Location not found"));
     }
 }
