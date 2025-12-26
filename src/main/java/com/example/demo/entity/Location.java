@@ -1,10 +1,14 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.util.List;
+import lombok.*;
 
 @Entity
-@Table(name = "locations")
+@Table(name="locations")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Location {
 
     @Id
@@ -14,19 +18,4 @@ public class Location {
     private String name;
     private Double latitude;
     private Double longitude;
-
-    @OneToMany(mappedBy = "pickupLocation")
-    private List<Shipment> pickups;
-
-    @OneToMany(mappedBy = "dropLocation")
-    private List<Shipment> drops;
-
-    public Location() {}
-
-    public Location(String name, Double latitude, Double longitude) {
-        this.name = name;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
 }

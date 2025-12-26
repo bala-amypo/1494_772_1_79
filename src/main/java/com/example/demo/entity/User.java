@@ -1,10 +1,14 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.util.List;
+import lombok.*;
 
 @Entity
-@Table(name = "users")
+@Table(name="users",uniqueConstraints=@UniqueConstraint(columnNames="email"))
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User {
 
     @Id
@@ -13,24 +17,10 @@ public class User {
 
     private String name;
 
-    @Column(unique = true)
+    @Column(nullable=false,unique=true)
     private String email;
 
     private String password;
 
     private String role;
-
-    @OneToMany(mappedBy = "user")
-    private List<Vehicle> vehicles;
-
-    public User() {}
-
-    public User(String name, String email, String password, String role) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
-
-    
 }
