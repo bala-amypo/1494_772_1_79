@@ -38,7 +38,7 @@ public class SecurityConfig {
         http.sessionManagement(sm ->
                 sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        // JwtFilter is currently NO-OP by Phase-1 design, but must be added
+        
         http.addFilterBefore(jwtFilter,
                 org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
 

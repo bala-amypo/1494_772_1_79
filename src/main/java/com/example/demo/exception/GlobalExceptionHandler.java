@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleIllegalArgument(IllegalArgumentException ex) {
         Map<String,Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("error", ex.getMessage());   // MUST keep exact keyword
+        body.put("error", ex.getMessage());   
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 

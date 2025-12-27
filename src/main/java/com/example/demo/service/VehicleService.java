@@ -11,9 +11,8 @@ public interface VehicleService {
 
     List<Vehicle> getVehiclesByUser(Long userId);
 
-    // REQUIRED BY TEST CASES
+   
     Vehicle findById(Long id);
 
-    // REQUIRED BY TEST CASES
     Vehicle findByVehicleNumber(String vehicleNumber);
 }

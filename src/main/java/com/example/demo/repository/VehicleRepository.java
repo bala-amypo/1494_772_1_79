@@ -10,6 +10,6 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
     List<Vehicle> findByUserId(Long userId);
 
-    // MUST return Optional because tests expect it
+    
     Optional<Vehicle> findByVehicleNumber(String vehicleNumber);
 }

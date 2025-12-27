@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/vehicles")
-@Validated  // Important: enables validation at controller level
+@Validated  
 public class VehicleController {
 
     private final VehicleService service;
