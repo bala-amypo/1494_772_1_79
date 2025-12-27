@@ -13,7 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import java.util.List;
 
 @Service
-@Validated  // Enable method-level validation
+@Validated  
 public class VehicleServiceImpl implements VehicleService {
 
     private final VehicleRepository vehicleRepository;
@@ -28,7 +28,7 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public Vehicle addVehicle(Long userId, @Valid Vehicle vehicle) {
         
-        // Validate capacity is not null and not negative/zero
+        
         if (vehicle.getCapacityKg() == null) {
             throw new IllegalArgumentException("Capacity cannot be null");
         }
@@ -36,7 +36,7 @@ public class VehicleServiceImpl implements VehicleService {
             throw new IllegalArgumentException("Capacity must be greater than 0");
         }
         
-        // Validate fuel efficiency if provided
+        
         if (vehicle.getFuelEfficiency() != null && vehicle.getFuelEfficiency() <= 0) {
             throw new IllegalArgumentException("Fuel efficiency must be greater than 0");
         }
@@ -49,30 +49,20 @@ public class VehicleServiceImpl implements VehicleService {
         return vehicleRepository.save(vehicle);
     }
 
-    /**
-     * IMPORTANT for t06:
-     * - Do NOT validate if user exists
-     * - Do NOT throw exception
-     * - Just return vehicles list
-     */
+    
     @Override
     public List<Vehicle> getVehiclesByUser(Long userId) {
         return vehicleRepository.findByUserId(userId);
     }
 
-    /**
-     * REQUIRED by multiple test cases
-     */
+    
     @Override
     public Vehicle findById(Long id) {
         return vehicleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Vehicle not found"));
     }
 
-    /**
-     * REQUIRED by TransportRouteOptimizationTest
-     * Must unwrap Optional
-     */
+    
     @Override
     public Vehicle findByVehicleNumber(String vehicleNumber) {
         return vehicleRepository.findByVehicleNumber(vehicleNumber)

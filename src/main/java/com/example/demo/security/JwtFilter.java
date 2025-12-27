@@ -18,7 +18,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
 
     public JwtFilter() {
-        // Default constructor for test environment
+        
         this.jwtUtil = null;
     }
 
@@ -32,8 +32,7 @@ public class JwtFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        // Phase-1: Do nothing functional — ONLY pass request forward
-        // Phase-2: SecurityConfig will wire token validation here
+        
         filterChain.doFilter(request, response);
     }
 }

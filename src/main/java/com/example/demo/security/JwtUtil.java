@@ -14,14 +14,14 @@ public class JwtUtil {
     private final SecretKey secretKey;
     private final long expirationMs;
 
-    // Default constructor used by Spring Boot
+    
     public JwtUtil() {
         String secret = "this_is_default_application_secret_key_123456789";
         this.secretKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
-        this.expirationMs = 3600000; // 1 hour
+        this.expirationMs = 3600000; 
     }
 
-    // Test environment constructor (TestNG uses this)
+    
     public JwtUtil(String secret, long expirationMs) {
         this.secretKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
         this.expirationMs = expirationMs;
